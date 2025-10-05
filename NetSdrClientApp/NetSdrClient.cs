@@ -116,8 +116,7 @@ namespace NetSdrClientApp
 
         private static void _udpClient_MessageReceived(object? sender, byte[] e)
 {
-    NetSdrMessageHelper.TranslateMessage(e, out MsgTypes type, out ControlItemCodes code, out _, out byte[] body);
-
+    NetSdrMessageHelper.TranslateMessage(e, out _, out ControlItemCodes code, out _, out byte[] body);
     Console.WriteLine($"Samples recieved: " + body.Select(b => Convert.ToString(b, toBase: 16)).Aggregate((l, r) => $"{l} {r}"));
 
     using (FileStream fs = new FileStream("samples.bin", FileMode.Append, FileAccess.Write, FileShare.Read))
